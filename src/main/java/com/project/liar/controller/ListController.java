@@ -19,20 +19,17 @@ public class ListController {
 
   @GetMapping("/list")
   @ResponseBody
-  public List<Acticle> kindList(){
-  List<Acticle> a = acticleRepository.findAll();
+  public List<Acticle> kindList() {
+    List<Acticle> a = acticleRepository.findAll();
     return a;
-}
+  }
 
-@GetMapping("/random_article")
-public String random(Model model) {
+  @GetMapping("/random_article")
+  public String random(Model model) {
     List<Acticle> allActicles = acticleRepository.findAll();
     Random random = new Random();
     Acticle randomActicle = allActicles.get(random.nextInt(allActicles.size()));
     model.addAttribute("randomActicle", randomActicle);
-    return "random_article";
+    return "html/random_article";
+  }
 }
-}
-  
-
-

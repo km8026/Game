@@ -4,46 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Article</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+        .article-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
         }
-        .article {
+        .article-title {
+            font-size: 24px;
             margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        }
+        .article-content {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .article-author {
+            font-style: italic;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2 class="text-center mb-4">Random Article</h2>
-    <div class="article">
-        <h3 th:text="${randomActicle.title}"></h3>
-        <p th:text="${randomActicle.content}"></p>
-        <p><strong>Author:</strong> <span th:text="${randomActicle.author}"></span></p>
-        <p><strong>Published Date:</strong> <span th:text="${randomActicle.publishedDate}"></span></p>
-    </div>
+<div class="article-container">
+    <h2 class="article-title" th:text="@{|${randomActicle.kind}|}"></h2>
 </div>
-
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-pzjw8f+WNxE+gN6ZEX6jw2VbJYU9Pa35HL2apmyJlNs9pyA/d/JmKHIfY6z5qotz" crossorigin="anonymous"></script>
 
 </body>
 </html>
