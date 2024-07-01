@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게임 시작</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .game-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .topic {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .player-count {
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <p class="player-count">참가 인원을 선택하세요.</p>
+    <div>
+        <select id="player-count-select">
+            <option value="4">4명</option>
+            <option value="5">5명</option>
+            <option value="6">6명</option>
+            <option value="7">7명</option>
+            <option value="8">8명</option>
+            <option value="9">9명</option>
+            <option value="10">10명</option>
+        </select>
+    </div>
+    <button class="btn" onclick="startGame()">게임 시작</button>
+</div>
+
+<script>
+    function startGame() {
+        var playerCount = document.getElementById('player-count-select').value;
+        if (playerCount >= 4 && playerCount <= 10) {
+            alert('게임을 시작합니다! 선택된 인원: ' + playerCount);
+            // 게임 시작 로직 추가
+        } else {
+            alert('참가 인원을 4명 이상 10명 이하로 선택해주세요.');
+        }
+    }
+</script>
+
+</body>
+</html>
