@@ -1,0 +1,19 @@
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/roulette.css}">
+  </head>
+  <body>
+    <div id = title>
+      <h1>점심 메뉴 룰렛</h3>
+    </div>
+    <div id="menu">
+      <canvas width="600" height='600'></canvas>  
+      <button onclick="rotate()">돌려돌려 돌림판</button>
+      <div id="addDiv">
+        <input type="text" id="menuAdd">
+        <button onclick="add()">메뉴 추가</button>
+      </div>
+    </div>
+  
+  <script src="/js/roulette.js"></script>
+  </body>

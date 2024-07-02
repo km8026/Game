@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Started</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .info {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Game Has Started</h1>
+        <div class="info">
+          <h2 class="article-title" th:text="@{|${randomActicle.kind}|}"></h2>
+        </div>
+        <p>Good luck and have fun!</p>
+        <div class="article-container">
+          
+<div class="countdown" id="countdown-display">2:00</div>
+          
+      </div>
+
+    </div>
+    <script>
+      // 시작 시간 설정 (분:초)
+      let minutes = 0;
+      let seconds = 5;
+  
+      // DOM 요소 가져오기
+      let countdownDisplay = document.getElementById('countdown-display');
+  
+      // 타이머 함수 정의
+      function startTimer() {
+          let interval = setInterval(function() {
+              seconds--;
+              if (seconds < 0) {
+                  if (minutes > 0) {
+                      minutes--;
+                      seconds = 59;
+                  } else {
+                      clearInterval(interval);
+                      alert('라이어를 골라주세요'); // 시간 종료 시 알람창 띄우기
+                  }
+              }
+              displayTime();
+          }, 1000);
+      }
+  
+      // 시간을 화면에 표시하는 함수
+      function displayTime() {
+          let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+          let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+          countdownDisplay.textContent = formattedMinutes + ':' + formattedSeconds;
+      }
+  
+      // 페이지 로드 후 타이머 시작
+      document.addEventListener('DOMContentLoaded', function() {
+          displayTime(); // 초기 시간 표시
+          startTimer(); // 타이머 시작
+      });
+  </script>
+</body>
+</html>
+ 
