@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liar Game Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .buttons {
+            display: flex;
+        }
+        .buttons form {
+            margin: 0 5px;
+        }
+        .buttons button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .buttons button.delete {
+            background-color: #f44336;
+        }
+        .buttons button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liar Game Rooms</h1>
+    <a th:href="@{/createRoom}">Create Room</a>
+    <ul>
+        <li th:each="room : ${gameRooms}">
+            <div>
+                <span th:text="${room.id}"></span>   <span th:text="${room.name}"></span>,
+               인원수 <span th:text="${#lists.size(room.players)}"></span>
+            </div>
+            <div class="buttons">
+                <form th:action="@{/joinRoom}" method="post">
+                    <input type="hidden" name="roomId" th:value="${room.id}" />
+                    <input type="text" name="playerName" placeholder="Enter your name" required />
+                    <button type="submit">Join</button>
+                </form>
+                <form th:action="@{/deleteRoom}" method="post">
+                    <input type="hidden" name="roomId" th:value="${room.id}" />
+                    <input type="text" name="creator" placeholder="Enter your name" required />
+                    <button type="submit" class="delete">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>

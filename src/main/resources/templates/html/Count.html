@@ -18,15 +18,15 @@
 
 <script>
     // 시작 시간 설정 (분:초)
-    var minutes = 0;
-    var seconds = 5;
+    let minutes = 0;
+    let seconds = 5;
 
     // DOM 요소 가져오기
-    var countdownDisplay = document.getElementById('countdown-display');
+    let countdownDisplay = document.getElementById('countdown-display');
 
     // 타이머 함수 정의
     function startTimer() {
-        var interval = setInterval(function() {
+        let interval = setInterval(function() {
             seconds--;
             if (seconds < 0) {
                 if (minutes > 0) {
@@ -43,8 +43,8 @@
 
     // 시간을 화면에 표시하는 함수
     function displayTime() {
-        var formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-        var formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+        let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+        let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
         countdownDisplay.textContent = formattedMinutes + ':' + formattedSeconds;
     }
 
