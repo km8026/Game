@@ -49,6 +49,7 @@ public class UserService {
     public User loginUser(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            System.out.println("로그인 성공");
             return user; // 로그인 성공
         }
         return null; // 로그인 실패

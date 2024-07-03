@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.liar.entity.User;
+import com.project.liar.repository.UserRepository;
 import com.project.liar.service.UserService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/users")
@@ -19,6 +21,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+	HttpSession session;
 
     @GetMapping("/checkUsername")
     @ResponseBody
@@ -44,16 +50,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, Model model) {
-        User loggedInUser = userService.loginUser(user.getUsername(), user.getPassword());
-        if (loggedInUser != null) {
-            model.addAttribute("user", loggedInUser);
-            return "redirect:/home"; // 로그인 후 홈 페이지로 리다이렉트
-        } else {
-            return "redirect:/users/login?error=true"; // 로그인 실패 시 로그인 페이지로 리다이렉트
-        }
-    }
 
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
@@ -69,4 +65,27 @@ public class UserController {
         }
         return "login"; // login.html 템플릿을 반환
     }
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute User user, Model model) {
+        User loggedInUser = userService.loginUser(user.getUsername(), user.getPassword());
+        if (loggedInUser != null) {
+            model.addAttribute("user", loggedInUser);
+            session.setAttribute("user_info", loggedInUser);
+            return "redirect:/index"; // 로그인 후 홈 페이지로 리다이렉트
+        } else {
+            return "redirect:/users/login?error=true"; // 로그인 실패 시 로그인 페이지로 리다이렉트
+        }
+    }
+
+    @PostMapping("/login2")
+	public String loginPost(@ModelAttribute User user) {
+		User dbUser = 
+			userRepository.findByUsernameAndPassword(
+				user.getUsername(), user.getPassword());
+		if(dbUser != null) {
+			session.setAttribute("user_info", dbUser);
+		}
+		return "redirect:/index";
+	}
 }

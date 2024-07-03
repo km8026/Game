@@ -1,9 +1,12 @@
-
 <div class="p-5 bg-primary text-white text-center">
-  <h1>
-    <a th:href="@{/index}" class="link-dark">
-      홈페이지
+  <h1 th:if="${session.user_info == null}">
+    <a th:href="@{/login}" class="link-dark">
+        환영합니다.
     </a>
   </h1>
-  
+  <h1 th:unless="${session.user_info == null}">
+    <a th:href="@{/mypage}" class="link-dark" >
+      [[ ${session.user_info.nickname} + '님' ]]
+    </a>
+  </h1>
 </div>
