@@ -2,7 +2,7 @@ a{
   text-decoration: none;
 }
 .gameboy-container {
-  margin-top: 5%;
+  margin-bottom: 10%;
   display: flex;
   /* Flexbox 설정 */
   justify-content: space-around;
@@ -11,12 +11,17 @@ a{
 
 .block1 {
   width: 100%;
-  
+ 
 }
 
 .gameboy {
-  
   text-align: center;
+}
+
+
+
+.gameboy {
+  
   position: relative;
   width: 350px;
   height: 570px;
