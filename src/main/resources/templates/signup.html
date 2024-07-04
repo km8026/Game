@@ -9,7 +9,6 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Press Start 2P', cursive; /* 레트로 폰트 사용 */
             background-color: #000; /* 배경색 검정 */
             color: #00aaff; /* 글자색 블루 */
         }
@@ -144,7 +143,6 @@
                 type: 'GET',
                 data: { username: username },
                 success: function(data) {
-                    console.log(data.result);
                     if (data.result) {
                         alert('아이디가 이미 사용 중입니다.');
                     } else {

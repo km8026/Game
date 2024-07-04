@@ -9,9 +9,9 @@ public class HomeController {
   public String index() {
     return "html/index";
   }
-  @GetMapping("/index2")
-  public String index2() {
-    return "html/index2";
+  @GetMapping("/cll")
+  public String cll() {
+    return "html/cll";
   }
 
   @GetMapping("/roulette")
