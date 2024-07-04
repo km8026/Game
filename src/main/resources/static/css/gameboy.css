@@ -138,7 +138,57 @@ a {
       }
     }
 
+    .display6 {
+      background-image: url("/img/3.jpg");
+      background-repeat: no-repeat; 
+      background-position: center; 
+      height: 190px;
+      width: 210px;
+      border-radius: 3px;
+      margin-bottom: 15px;
+    }
+    .display5 {
+      background-image: url("/img/3.jpg");
+      background-repeat: no-repeat; 
+      background-position: center; 
+      height: 190px;
+      width: 210px;
+      border-radius: 3px;
+      margin-bottom: 15px;
+    }
+    .display4 {
+      background-image: url("/img/1.gif");
+      background-repeat: no-repeat; 
+      background-position: center; 
+      height: 190px;
+      width: 210px;
+      border-radius: 3px;
+      margin-bottom: 15px;
+    }
+    
+    .display3 {
+      background-image: url("/img/2.gif");
+      background-repeat: no-repeat;
+      background-position: center; 
+      height: 190px;
+      width: 210px;
+      border-radius: 3px;
+      margin-bottom: 15px;
+    }
+    .display2 {
+      background-image: url("/img/4.jpg");
+      background-repeat: no-repeat;
+      background-position: center; 
+      height: 190px;
+      width: 210px;
+      border-radius: 3px;
+      margin-bottom: 15px;
+    }
+
     .display {
+      background-image: url("/img/3.jpg");
+      background-repeat: no-repeat;
+      background-position: center; 
       height: 190px;
       width: 210px;
       border-radius: 3px;
