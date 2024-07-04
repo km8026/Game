@@ -1,0 +1,104 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    margin: 0;
+    background-color: green; /* 배경색을 녹색으로 설정 */
+    border: 15px solid brown; /* 창의 테두리에 갈색 선을 두름 */
+    box-sizing: border-box; /* 테두리를 포함하여 크기를 계산 */
+    align-items: center;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    display: flex;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 20px;
+    flex: 1;
+}
+
+.card-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 20px;
+}
+
+.player-hand {
+    position: absolute;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.handScore{
+    position: absolute;
+    text-align: center;
+    width: 500px;
+    top: 75px;
+}
+
+.player-hand h1, .player-hand h2 {
+    color: white;
+    margin: 0;
+}
+
+.player-hand ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.card {
+    margin: 10px;
+}
+
+.card img {
+    cursor: pointer;
+    transition: border 0.3s ease; /* 테두리 변화에 대한 부드러운 전환 효과 */
+}
+
+.card input[type="checkbox"] {
+    display: none;
+}
+
+.card.selected img {
+    border: 5px solid yellow; /* 선택된 이미지에 하늘색 테두리를 설정 */
+    box-sizing: border-box; /* 테두리를 포함하여 크기를 계산 */
+    transform: none; /* 선택 시 이동 방지 */
+}
+
+.score {
+    color: white;
+    align-self: flex-end;
+    position: absolute;
+}
+
+.scoreText {
+    display: inline;
+    font-size: 30px;
+}
+
+#scoreT1 {
+    width: 300px;
+    position: absolute;
+    right: 100px;
+}

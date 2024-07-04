@@ -11,13 +11,14 @@ import lombok.Data;
 @Entity
 @Data
 public class Player {
-  @Id @GeneratedValue( strategy = GenerationType.IDENTITY)
+  @Id 
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private Boolean isLiar;
+  private Boolean isLiar = false;  // 기본값을 false로 설정
 
   @ManyToOne
-    @JoinColumn(name = "gameRomm")
-    private GameRoom gameRoom;
-  
+  @JoinColumn(name = "gameRoom_id")
+  private GameRoom gameRoom;
 }
+ 

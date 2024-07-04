@@ -1,29 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Press Start 2P', cursive; /* 레트로 폰트 사용 */
+            background-color: #000; /* 배경색 검정 */
+            color: #00aaff; /* 글자색 블루 */
+        }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: #1a1a1a; /* 배경색 다크 그레이 */
+            border: 2px solid #00aaff; /* 블루 테두리 */
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #00aaff; /* 텍스트 블루 */
+            font-size: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 2px solid #00aaff; /* 테두리 블루 */
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .input-group-text {
+            padding: 10px;
+            background-color: #333; /* 배경색 다크 그레이 */
+            border: none;
+            color: #00aaff; /* 아이콘 블루 */
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #000; /* 입력 필드 배경색 검정 */
+            color: #00aaff; /* 입력 필드 글자색 블루 */
+            outline: none;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #00aaff; /* 테두리 블루 */
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            background-color: #000; /* 버튼 배경색 검정 */
+            color: #00aaff; /* 버튼 글자색 블루 */
+        }
+
+        .btn-danger {
+            border-color: #ff0040; /* 빨강 테두리 */
+            color: #ff0040; /* 버튼 글자색 빨강 */
+        }
+
+        a {
+            color: #00aaff; /* 링크 색상 블루 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        p th {
+            color: red;
+        }
+        
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
+
+<div class="container">
     <form method="post" action="/users/login">
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username" required>
+        <h1>Login</h1>
+        <div class="input-group">
+            <span class="input-group-text">👤</span>
+            <input type="text" class="form-control" name="username" placeholder="아이디" required>
         </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" required>
+        <div class="input-group">
+            <span class="input-group-text">🔒</span>
+            <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
         </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-        <div>
-            <p>계정이 없을 경우 <a href="/users/signup">회원가입</a></p>
-        </div>
-        <div>
-            <!-- 로그인 실패 시 에러 메시지 표시 -->
-            <p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;"></p>
-        </div>
+        <button type="submit" class="btn">Login</button>
     </form>
+    <button class="btn btn-danger" onclick="location.href='/users/signup'">Sign Up</button>
+    <!-- Home 버튼 추가 -->
+    <button class="btn" onclick="location.href='/index'">Home</button>
+    <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+</div>
+
 </body>
 </html>

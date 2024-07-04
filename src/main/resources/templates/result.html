@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote for the Liar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .players {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            text-align: center;
+        }
+        .players ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .players li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 3px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .players button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .players button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .exit-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 20px;
+        }
+        .exit-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vote for the Liar</h1>
+        <div class="players">
+            <h3>플레이어 목록</h3>
+            <ul>
+                <li th:each="player : ${gameRoom.players}">
+                    <span th:text="${player.name}"></span>
+                    <button th:attr="data-player-name=${player.name}" onclick="voteLiar(this)">Vote</button>
+                </li>
+            </ul>
+        </div>
+        <div id="result"></div>
+        <button class="exit-btn" onclick="exitGame()" style="display: none;">나가기</button>
+    </div>
+
+    <script>
+        function voteLiar(button) {
+            const playerName = button.getAttribute('data-player-name');
+            const roomId = document.getElementById('room-id').value;
+            fetch(`/vote/${playerName}?roomId=${roomId}`)
+                .then(response => response.text())
+                .then(result => {
+                    document.getElementById('result').innerText = result;
+                    document.querySelector('.exit-btn').style.display = 'block';
+                });
+        }
+
+        function exitGame() {
+            const roomId = document.getElementById('room-id').value;
+            const playerName = document.getElementById('player-name').value;
+            fetch(`/exit/${roomId}?playerName=${playerName}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.text())
+                .then(() => {
+                    window.location.href = '/index';
+                });
+        }
+
+        // Thymeleaf 변수 사용
+        var roomId = /*[[${gameRoom.id}]]*/ 'roomId';
+    </script>
+    <input type="hidden" id="room-id" th:value="${gameRoom.id}">
+    <input type="hidden" id="player-name" th:value="${playerName}">
+</body>
+</html>

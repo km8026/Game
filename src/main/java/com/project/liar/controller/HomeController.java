@@ -9,16 +9,21 @@ public class HomeController {
   public String index() {
     return "html/index";
   }
+  @GetMapping("/index2")
+  public String index2() {
+    return "html/index2";
+  }
 
   @GetMapping("/roulette")
   public String roulette() {
     return "html/roulette";
   }
-
-  @GetMapping("/home")
-  public String home() {
-    return "home"; // home.html 템플릿을 반환
+  @GetMapping("/tetris")
+  public String tetris() {
+    return "html/tetris";
   }
+  
+
 
   // 로그아웃 처리
   @GetMapping("/logout")

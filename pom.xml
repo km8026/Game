@@ -68,6 +68,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
         <!-- Spring Security 의존성 추가 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -92,5 +96,7 @@
             </plugin>
         </plugins>
     </build>
+
+
 
 </project>

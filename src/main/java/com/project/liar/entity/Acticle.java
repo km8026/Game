@@ -14,7 +14,8 @@ public class Acticle {
   
   private long id;
 
-  String kind;  
+  private String kind;
+
 
 
 }

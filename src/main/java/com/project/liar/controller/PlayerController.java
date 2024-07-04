@@ -17,16 +17,10 @@ public class PlayerController {
     @Autowired
     private PlayerRepository playerRepository;
 
-    @Autowired
-    private GameRoomRepository gmaeRoomRepository;
-
     @PostMapping
     public Player joinGameRoom(@RequestBody Player player) {
         return playerRepository.save(player);
     }
 
-    @GetMapping("/{roomId}")
-    public List<Player> getPlayersInGameRoom(@PathVariable Long roomId) {
-        return playerRepository.findAllByGameRoomId(roomId);
-    }
+
 }

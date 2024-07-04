@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Lobby</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .info, .players {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            text-align: center;
+        }
+        .players ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .players li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 3px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>플레이어가 모두 참여했는지<br>확인해주세요 (새로고침!!)</h1>
+        <div class="info">
+            <p>
+              <span th:text="@{|${gameRoom.id}번 방|}"></span> <strong><span th:text="${gameRoom.name}"></span></strong>
+            </p>
+            <p><strong>방장 이름:</strong> <span th:text="${gameRoom.creator}"></span></p>
+            <p><strong>현재 인원수:</strong> <span th:text="${#lists.size(gameRoom.players)}"></span></p>
+        </div>
+
+        <div class="players">
+            <h3>플레이어 목록</h3>
+            <ul>
+                <li th:each="player : ${gameRoom.players}" th:text="${player.name}"></li>
+            </ul>
+        </div>
+
+        <!-- 방장인 경우 시작하기 버튼을 표시 -->
+        <h3 th:if="${isCreator}">시작하기</h3>
+        <form th:if="${isCreator}" th:action="@{/start/${gameRoom.id}}" method="post">
+            <input type="hidden" name="playerName" th:value="${playerName}" />
+            <button type="submit" id="startButton">Start</button>
+        </form>
+    </div>
+
+    <!-- 채팅박스 및 메시지 입력 필드 -->
+    <div id="chatbox"></div>
+    <input type="text" id="message" placeholder="Type a message..."/>
+    <button type="button" onclick="sendMessage()">Send</button>
+
+    <script>
+        // playerName을 JavaScript 변수로 설정
+        var playerName = /*[[${playerName}]]*/ '[[${playerName}]]';
+
+        // WebSocket 연결 설정
+        var socket = new WebSocket("ws://localhost:8080/list");
+
+        // WebSocket이 열렸을 때 실행되는 함수
+        socket.onopen = () => {
+            const gameRoom = {
+                id: [[${gameRoom.id}]],
+                name: '[[${gameRoom.name}]]',
+                creator: '[[${gameRoom.creator}]]'
+            }
+            sendMessage(JSON.stringify(gameRoom)); // 방 정보를 WebSocket으로 전송
+        };
+
+        // WebSocket으로 메시지를 받았을 때 실행되는 함수
+        socket.onmessage = function(event) {
+            const message = event.data;
+            if (message.startsWith("create:::")) {
+                console.log("Room created");
+            } else if (message.startsWith("start:::")) {
+                const data = JSON.parse(message.replace("start:::", ""));
+                const roomId = data.roomId;
+                console.log("Room ID:", roomId);
+                location = `/start/${roomId}?playerName=${playerName}`; // 게임 시작 URL로 이동
+            }
+        };
+
+        // WebSocket으로 메시지를 전송하는 함수
+        function sendMessage(message) {
+            socket.send("create:::" + message);
+        }
+
+        // 시작 버튼 클릭 이벤트 설정
+        const startButton = document.getElementById('startButton');
+        if (startButton) {
+            startButton.addEventListener('click', function() {
+                const roomId = [[${gameRoom.id}]];
+                socket.send('start:::' + JSON.stringify({ roomId: roomId }));
+            });
+        }
+    </script>
+</body>
+</html>

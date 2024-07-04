@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liar Game Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+        }
+
+        .buttons form {
+            margin: 0 5px;
+        }
+
+        .buttons button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .buttons button.delete {
+            background-color: #f44336;
+        }
+
+        .buttons button:hover {
+            opacity: 0.8;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('joinModal');
+            const closeModal = document.getElementsByClassName('close')[0];
+            const joinForm = document.getElementById('joinForm');
+
+            document.querySelectorAll('.joinButton').forEach(button => {
+                button.addEventListener('click', function () {
+                    const roomId = this.getAttribute('data-room-id');
+                    document.getElementById('modalRoomId').value = roomId;
+                    modal.style.display = 'flex';
+                });
+            });
+
+            closeModal.onclick = function () {
+                modal.style.display = 'none';
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            };
+
+            joinForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const roomId = document.getElementById('modalRoomId').value;
+                const playerName = document.getElementById('modalPlayerName').value;
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.action = `/joinRoom`;
+                form.innerHTML = `<input type="hidden" name="roomId" value="${roomId}"><input type="hidden" name="playerName" value="${playerName}">`;
+                document.body.appendChild(form);
+                form.submit();
+            });
+
+            // WebSocket 연결 설정
+            var socket = new WebSocket("ws://localhost:8080/list");
+
+            socket.onmessage = function (event) {
+                console.log(event.data)
+                const gameRoom = event.data;
+
+                const li = `<li>
+                    <div>
+                        <span th:text="${gameRoom.id}"></span>   
+                        <span th:text="${gameRoom.name}"></span>
+                        새로고침을 누르세요</span>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="joinButton" data-room-id=${gameRoom.id}">Join</button>
+                        <form action="@{/deleteRoom}" method="post">
+                            <input type="hidden" name="roomId" value="${gameRoom.id}" />
+                            <button type="submit" class="delete">Delete</button>
+                        </form>
+                    </div>
+                </li>`;
+                document.querySelector("#gameRooms").innerHTML += li;
+            };
+
+            function sendMessage() {
+                var input = document.getElementById('message');
+                socket.send(input.value);
+                input.value = '';
+            }
+            ////////////////////////////////////////////////////////////
+            // WebSocket 연결 설정 (lobby)
+            
+        });
+
+    </script>
+</head>
+
+<body>
+    <h1>Liar Game Rooms</h1>
+    <a th:href="@{/createRoom}">Create Room</a>
+    <ul id="gameRooms">
+        <li th:each="room : ${gameRooms}">
+            <div>
+                <span th:text="${room.id}"></span> <span th:text="${room.name}"></span>,
+                인원수 <span th:text="${#lists.size(room.players)}"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" class="joinButton" th:attr="data-room-id=${room.id}">Join</button>
+                <form th:action="@{/deleteRoom}" method="post">
+                    <input type="hidden" name="roomId" th:value="${room.id}" />
+                    <button type="submit" class="delete">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Join Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="joinForm">
+                <input type="hidden" id="modalRoomId" name="roomId" />
+                <label for="modalPlayerName">닉네임을 적으세요:</label>
+                <input type="text" id="modalPlayerName" name="playerName" required />
+                <button type="submit">Join Room</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

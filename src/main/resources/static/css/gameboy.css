@@ -1,18 +1,18 @@
-a{
+a {
   text-decoration: none;
 }
+
 .gameboy-container {
-  margin-bottom: 10%;
+  margin-bottom: 20px;
+  margin-top: 15px;
   display: flex;
   /* Flexbox 설정 */
-  justify-content: space-around;
+  justify-content: space-evenly;
   /* 요소 간의 간격 조정 */
+
+
 }
 
-.block1 {
-  width: 100%;
- 
-}
 
 .gameboy {
   text-align: center;
@@ -21,7 +21,7 @@ a{
 
 
 .gameboy {
-  
+
   position: relative;
   width: 350px;
   height: 570px;
@@ -139,7 +139,6 @@ a{
     }
 
     .display {
-      background-color: #929d97;
       height: 190px;
       width: 210px;
       border-radius: 3px;

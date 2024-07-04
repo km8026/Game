@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>파이브 카드 드로우</title>
+    <link rel="stylesheet" href="/css/pokerstyles.css">
+    <link rel="stylesheet" href="/css/pokerbutton.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card-section player-cards">
+            <div class="player-hand">
+                <h1 th:text="${handType}"></h1> <!-- 현재 패의 종류를 표시 -->
+                <h2 class="handScore" th:text="'현재 패의 점수: ' + ${handScore}"></h2> <!-- 현재 패의 점수를 표시 -->
+            </div>
+            <div class="buttons">
+                <form th:action="@{/game/confirm-cards}" method="post">
+                    <button class="brutalist-button" type="submit" id="Confirm">
+                        <div class="button-text">
+                            <span>확인</span>
+                        </div>
+                    </button>
+                </form>
+                <form th:action="@{/game/reselect-cards}" method="post">
+                    <button class="brutalist-button" type="submit" id="Change" th:disabled="${reselectCount >= 5}">
+                        <div class="button-text">
+                            <span>카드교체</span>
+                        </div>
+                    </button>
+                    <ul>
+                        <li th:each="card, cardIndex : ${session.playerHand}" class="card">
+                            <input type="checkbox" th:id="'checkbox-' + ${cardIndex.index}" th:value="${cardIndex.index}" name="selectedIndexes">
+                            <img th:src="@{'/img/trumpcard/' + ${card.rank.toString().toLowerCase()} + '_of_' + ${card.suit.toString().toLowerCase()} + '.png'}" alt="카드 이미지" height="300px" width="225px" th:onclick="|toggleCheckbox('checkbox-' + ${cardIndex.index})|">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="score">
+        <div class="scoreText" id="scoreT1">Total Score : </div>
+        <div class="scoreText" th:text="${session.totalScore != null ? session.totalScore : 'Total Score: 0'}"></div> <!-- 세션에 저장된 점수 출력 -->
+    </div>
+
+    <script>
+        function toggleCheckbox(checkboxId) {
+            const checkbox = document.getElementById(checkboxId);
+            checkbox.checked = !checkbox.checked;
+            checkbox.parentElement.classList.toggle('selected', checkbox.checked);
+        }
+    </script>
+</body>
+</html>
