@@ -26,7 +26,7 @@ public class GameController {
     private CardService cardService;
 
     @Autowired
-    private ScoreService scoreService;
+    private ScoreService scoreService; 
 
     private static final String PLAYER_HAND_SESSION_ATTR = "playerHand";
     private static final String HAND_TYPE_SESSION_ATTR = "handType";
