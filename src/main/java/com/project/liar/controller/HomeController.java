@@ -33,6 +33,6 @@ public class HomeController {
   public String logout() {
     // 로그아웃 로직 추가 (예: 세션 삭제, 인증 해제 등)
     // Spring Security에서는 /logout 경로로 POST 요청을 보내면 자동 로그아웃 처리됨
-    return "redirect:/login"; // 로그아웃 후 로그인 페이지로 리다이렉트, logout 파라미터 추가
+    return "redirect:/"; // 로그아웃 후 로그인 페이지로 리다이렉트, logout 파라미터 추가
   }
 }

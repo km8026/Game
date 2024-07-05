@@ -49,7 +49,7 @@ public class UserController {
         try {
             User newUser = userService.signupUser(user.getNickname(), user.getUsername(), user.getPassword());
             model.addAttribute("user", newUser);
-            return "redirect:/login"; // 회원가입 후 로그인 페이지로 리다이렉트
+            return "redirect:/"; // 회원가입 후 로그인 페이지로 리다이렉트
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "signup"; // 에러 메시지를 포함하여 signup 페이지로 리다이렉트
@@ -77,7 +77,7 @@ public class UserController {
         if (loggedInUser != null) {
             model.addAttribute("user", loggedInUser);
             session.setAttribute("user_info", loggedInUser);
-            return "redirect:/index"; // 로그인 후 홈 페이지로 리다이렉트
+            return "redirect:/"; // 로그인 후 홈 페이지로 리다이렉트
         } else {
             return "redirect:/users/login?error=true"; // 로그인 실패 시 로그인 페이지로 리다이렉트
         }
@@ -143,6 +143,7 @@ public class UserController {
     }
 
     @PostMapping("/login2")
+<<<<<<< HEAD
     public String loginPost(@ModelAttribute User user) {
         User dbUser = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (dbUser != null) {
@@ -151,3 +152,4 @@ public class UserController {
         return "redirect:/index";
     }
 }
+>>>>>>> 25246c642c3947879260d3fb9c1e02aaad0b2030

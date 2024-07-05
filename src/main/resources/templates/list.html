@@ -136,7 +136,7 @@
                 form.submit();
             });
 
-            // WebSocket 연결 설정
+            // WebSocket 연결 설정  // 서버 킬때마다 바꿀것
             var socket = new WebSocket("ws://localhost:8080/list");
 
             socket.onmessage = function (event) {

@@ -21,7 +21,7 @@ public class LoginController {
     @PostMapping("path")
     public String logout() {
  
-        return "redirect:index";
+        return "redirect:/";
     }
     
 }
