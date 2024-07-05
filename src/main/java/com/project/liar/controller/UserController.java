@@ -97,6 +97,6 @@ public class UserController {
       if(dbUser != null) {
          session.setAttribute("user_info", dbUser);
       }
-      return "redirect:/index";
+      return "redirect:/";
    }
 }
