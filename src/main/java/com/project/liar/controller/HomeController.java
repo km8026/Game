@@ -23,7 +23,10 @@ public class HomeController {
     return "html/tetris";
   }
   
-
+  @GetMapping("/index")
+  public String redirectToHome() {
+      return "redirect:/"; // 리다이렉트 경로 설정
+  }
 
   // 로그아웃 처리
   @GetMapping("/logout")

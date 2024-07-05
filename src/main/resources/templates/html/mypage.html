@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleEdit(field) {
+            const inputGroup = document.getElementById(field + '-input-group');
+            if (inputGroup.classList.contains('hidden')) {
+                inputGroup.classList.remove('hidden');
+            } else {
+                inputGroup.classList.add('hidden');
+            }
+        }
+
+        async function checkDuplicate(field) {
+            const newValue = document.getElementById(field + '-new').value;
+            const response = await fetch(`/users/checkDuplicate?field=${field}&value=${newValue}`);
+            const result = await response.json();
+            return result.isDuplicate;
+        }
+
+        async function confirmChange(event, field) {
+            event.preventDefault();
+            if (field !== 'password' && await checkDuplicate(field)) {
+                alert(`중복된 ${field === 'nickname' ? '닉네임' : '아이디'} 입니다.`);
+                return;
+            }
+
+            if (confirm('정말 변경하시겠습니까?')) {
+                const form = document.getElementById(field + '-form');
+                form.submit();
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>My Page</h1>
+    <h2>[[${user.username}]]님 환영합니다!</h2>
+
+    <form id="nickname-form" action="/users/updateNickname" method="post">
+        <div class="input-group">
+            <span class="input-group-text">💬</span>
+            <button type="button" class="btn btn-secondary" onclick="toggleEdit('nickname')">Change Nickname</button>
+        </div>
+        <div id="nickname-input-group" class="input-group hidden">
+            <input type="text" class="form-control" id="nickname-new" name="nickname" placeholder="Enter new nickname" required>
+            <button type="button" class="btn btn-primary" onclick="confirmChange(event, 'nickname')">Confirm</button>
+        </div>
+    </form>
+
+    <form id="username-form" action="/users/updateUsername" method="post">
+        <div class="input-group">
+            <span class="input-group-text">👤</span>
+            <button type="button" class="btn btn-secondary" onclick="toggleEdit('username')">Change Username</button>
+        </div>
+        <div id="username-input-group" class="input-group hidden">
+            <input type="text" class="form-control" id="username-new" name="username" placeholder="Enter new username" required>
+            <button type="button" class="btn btn-primary" onclick="confirmChange(event, 'username')">Confirm</button>
+        </div>
+    </form>
+
+    <form id="password-form" action="/users/updatePassword" method="post">
+        <div class="input-group">
+            <span class="input-group-text">🔒</span>
+            <button type="button" class="btn btn-secondary" onclick="toggleEdit('password')">Change Password</button>
+        </div>
+        <div id="password-input-group" class="input-group hidden">
+            <input type="password" class="form-control" id="password-new" name="password" placeholder="Enter new password" required>
+            <button type="button" class="btn btn-primary" onclick="confirmChange(event, 'password')">Confirm</button>
+        </div>
+    </form>
+
+    <button class="btn btn-danger" onclick="location.href='/users/logout'">Logout</button>
+    <button class="btn" onclick="location.href='/index'">Home</button>
+    <div class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+</div>
+</body>
+</html>

@@ -54,4 +54,11 @@ public class UserService {
         }
         return null; // 로그인 실패
     }
+
+    public void updateUserPassword(User user, String newPassword) {
+        // 새 비밀번호를 해싱하여 저장
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+    }
 }
