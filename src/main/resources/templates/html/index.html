@@ -18,6 +18,15 @@
       margin-bottom: -3rem;
     }
 
+    body {
+      background-image: url("/img/background/2.jpg");
+      background-size: cover;
+      /* 화면에 맞게 이미지를 늘리거나 줄입니다. */
+      background-position: center;
+      /* 이미지가 화면 중앙에 위치하도록 설정합니다. */
+      background-repeat: no-repeat;
+      /* 이미지 반복을 방지합니다. */
+    }
   </style>
 </head>
 
@@ -82,13 +91,13 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('.gameboy6_link').click(function(event) {
+    $(document).ready(function () {
+      $('.gameboy6_link').click(function (event) {
         // AJAX 요청을 통해 로그인 상태 확인
         $.ajax({
           type: 'GET',
           url: '/users/checkLoginStatus', // 사용자 로그인 상태 확인 컨트롤러 경로
-          success: function(response) {
+          success: function (response) {
             if (response.loggedIn) {
               // 로그인 상태인 경우, 외부 링크로 이동
               window.location.href = 'https://pokerogue.net/';
@@ -97,44 +106,45 @@
               window.location.href = '/users/login';
             }
           },
-          error: function(xhr, status, error) {
+          error: function (xhr, status, error) {
             console.error('Error checking login status:', error);
           }
         });
-  
+
         // 기본 클릭 동작을 막습니다.
         event.preventDefault();
       });
     });
-  document.addEventListener("DOMContentLoaded", function () {
-  const progressBar = document.querySelector('.progress-bar');
-  const loadingScreen = document.querySelector('#loading-screen');
-  const delay = () => {
-    return new Promise(resolve => setTimeout(resolve, 600));
-  }
+    document.addEventListener("DOMContentLoaded", function () {
+      const progressBar = document.querySelector('.progress-bar');
+      const loadingScreen = document.querySelector('#loading-screen');
+      const delay = () => {
+        return new Promise(resolve => setTimeout(resolve, 600));
+      }
 
-  const hideProgressBar = async () => {
-    await delay();
-    progressBar.style.display = 'none';
-  }
-  
-  const init = async () => {
-    await delay();
-    await hideProgressBar();
-    const curtainLeft = document.querySelector('.curtain-left');
-    const curtainRight = document.querySelector('.curtain-right');
-    const content = document.getElementById('content');
+      const hideProgressBar = async () => {
+        await delay();
+        progressBar.style.display = 'none';
+      }
 
-    curtainLeft.style.transform = 'translateX(-100%)';
-    curtainRight.style.transform = 'translateX(100%)';
+      const init = async () => {
+        await delay();
+        await hideProgressBar();
+        const curtainLeft = document.querySelector('.curtain-left');
+        const curtainRight = document.querySelector('.curtain-right');
+        const content = document.getElementById('content');
 
-    content.classList.add('show');
+        curtainLeft.style.transform = 'translateX(-100%)';
+        curtainRight.style.transform = 'translateX(100%)';
 
-    setTimeout(() => {
-      loadingScreen.style.display = 'none';
-    }, 600);
-  };
-  init();
-});
-</script>
+        content.classList.add('show');
+
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 600);
+      };
+      init();
+    });
+  </script>
+
 </html>
