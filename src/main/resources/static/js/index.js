@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const progressBar = document.querySelector('.progress-bar');
   const loadingScreen = document.querySelector('#loading-screen');
   const delay = () => {
-    return new Promise(resolve => setTimeout(resolve, 500));
+    return new Promise(resolve => setTimeout(resolve, 600));
   }
 
   const hideProgressBar = async () => {
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(() => {
       loadingScreen.style.display = 'none';
-    }, 500);
+    }, 600);
   };
   init();
 });
