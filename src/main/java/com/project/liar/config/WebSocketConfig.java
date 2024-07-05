@@ -11,6 +11,8 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new ChatHandler(), "/list");
+        registry.addHandler(new ChatHandler(), "/list")
+                .setAllowedOrigins("https://f72c-218-235-89-82.ngrok-free.app")
+                .withSockJS();
     }
 }
