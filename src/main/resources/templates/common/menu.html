@@ -12,12 +12,8 @@
       <table>
         <a class="active" th:href="@{/index}">Home</a>
         <a th:href="@{/users/mypage}">Mypage</a>
-        <a href="https://cheongwon.go.kr/portal" class="contact-link">Contact</a>
-
-        <div class="topnav-right">
-          <a th:href="@{/login}" th:if="${session.user_info == null}">Login</a>
-          <a th:href="@{/logout}" th:if="${session.user_info != null}">Logout</a>
-        </div>
+        <a th:href="@{/login}" th:if="${session.user_info == null}">Login</a>
+        <a th:href="@{/logout}" th:if="${session.user_info != null}">Logout</a>
         <div id="indicator"></div>
       </table>
     </div>
