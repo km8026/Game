@@ -3,130 +3,16 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      background-color: #292929;
-      overflow: auto;
-    }
-
-    .topm {
-      margin-top: 50px;
-      width: 100%;
-      height: 50px;
-    }
-
-    .topnav {
-
-      right: 0;
-      left: 0;
-      width: 319px;
-      display: table;
-      margin: 0 auto;
-      transform: translateY(-50%);
-    }
-
-    .topnav a {
-      position: relative;
-      width: 33.333%;
-      display: table-cell;
-      text-align: center;
-      color: #949494;
-      text-decoration: none;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      font-weight: bold;
-      padding: 10px 20px;
-      transition: 0.2s ease color;
-    }
-
-    .topnav a:before,
-    .topnav a:after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      transition: 0.2s ease transform;
-    }
-
-
-    .topnav a:before {
-      top: 0;
-      left: 10px;
-      width: 6px;
-      height: 6px;
-    }
-
-    .topnav a:after {
-      top: 5px;
-      left: 18px;
-      width: 4px;
-      height: 4px;
-    }
-
-    .topnav a:nth-child(1):before {
-      background-color: yellow;
-    }
-
-    .topnav a:nth-child(1):after {
-      background-color: red;
-    }
-
-    .topnav a:nth-child(2):before {
-      background-color: #00e2ff;
-    }
-
-    .topnav a:nth-child(2):after {
-      background-color: #89ff00;
-    }
-
-    .topnav a:nth-child(3):before {
-      background-color: purple;
-    }
-
-    .topnav a:nth-child(3):after {
-      background-color: palevioletred;
-    }
-
-    #indicator {
-      top: 40px;
-      position: absolute;
-      left: 5%;
-      bottom: 0;
-      width: 30px;
-      height: 3px;
-      background-color: #fff;
-      border-radius: 5px;
-      transition: 0.2s ease left;
-    }
-
-    .topnav a:hover {
-      color: #fff;
-    }
-
-    .topnav a:nth-child(1):hover~#indicator {
-      background: linear-gradient(130deg, yellow, red);
-    }
-
-    .topnav a:nth-child(2):hover~#indicator {
-      left: 34%;
-      background: linear-gradient(130deg, #00e2ff, #89ff00);
-    }
-
-    .topnav a:nth-child(3):hover~#indicator {
-      left: 70%;
-      background: linear-gradient(130deg, purple, palevioletred);
-    }
-  </style>
+  <link rel="stylesheet" th:href="@{/css/menu.css}">
 </head>
 
 <body>
   <div class="topm">
-
     <div class="topnav">
       <table>
         <a class="active" th:href="@{/index}">Home</a>
         <a th:href="@{/users/mypage}">Mypage</a>
-        <a href="#contact">Contact</a>
+        <a href="https://cheongwon.go.kr/portal" class="contact-link">Contact</a>
 
         <div class="topnav-right">
           <a th:href="@{/login}" th:if="${session.user_info == null}">Login</a>
@@ -136,6 +22,9 @@
       </table>
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/relogin.js"></script>
 </body>
 
 </html>
