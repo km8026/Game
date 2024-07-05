@@ -2,29 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #000; /* 배경색 검정 */
-            color: #00aaff; /* 글자색 블루 */
+            font-family: 'Press Start 2P', cursive;
+            background-color: #000; /* 기본 배경색 검정 */
+            color: #00aaff;
+            overflow: hidden;
         }
 
         .container {
-            width: 300px;
-            padding: 20px;
-            background-color: #1a1a1a; /* 배경색 다크 그레이 */
-            border: 2px solid #00aaff; /* 블루 테두리 */
+            position: relative;
+            z-index: 1;
+            width: 400px;
+            padding: 40px;
+            background-color: rgba(26, 26, 26, 0.9); /* 투명 배경 */
+            border: 2px solid #00aaff;
             border-radius: 10px;
             text-align: center;
+            box-shadow: 0 0 20px #00aaff;
         }
 
         h1 {
             margin-bottom: 20px;
-            color: #00aaff; /* 텍스트 블루 */
+            color: #00aaff;
             font-size: 20px;
         }
 
@@ -32,16 +41,16 @@
             display: flex;
             align-items: center;
             margin-bottom: 15px;
-            border: 2px solid #00aaff; /* 테두리 블루 */
+            border: 2px solid #00aaff;
             border-radius: 5px;
             overflow: hidden;
         }
 
         .input-group-text {
             padding: 10px;
-            background-color: #333; /* 배경색 다크 그레이 */
+            background-color: #333;
             border: none;
-            color: #00aaff; /* 아이콘 블루 */
+            color: #00aaff;
             font-size: 14px;
         }
 
@@ -49,8 +58,8 @@
             width: 100%;
             padding: 10px;
             border: none;
-            background-color: #000; /* 입력 필드 배경색 검정 */
-            color: #00aaff; /* 입력 필드 글자색 블루 */
+            background-color: #000;
+            color: #00aaff;
             outline: none;
             font-size: 14px;
         }
@@ -58,13 +67,29 @@
         .btn {
             width: 100%;
             padding: 10px;
-            border: 2px solid #00aaff; /* 테두리 블루 */
+            border: 2px solid #00aaff;
             border-radius: 5px;
             font-size: 14px;
             cursor: pointer;
             margin-bottom: 10px;
-            background-color: #000; /* 버튼 배경색 검정 */
-            color: #00aaff; /* 버튼 글자색 블루 */
+            background-color: #000;
+            color: #00aaff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #00aaff;
+            color: #000;
+        }
+
+        .btn-danger {
+            border-color: #ff0040;
+            color: #ff0040;
+        }
+
+        .btn-danger:hover {
+            background-color: #ff0040;
+            color: #000;
         }
 
         .btn-check {
@@ -73,19 +98,13 @@
             border: 2px solid #00aaff; /* 테두리 블루 */
             padding: 0.5px 5px;
             cursor: pointer; /* 커서 설정 */
-
             border-radius: 5px; /* 둥근 모서리 */
             font-size: 12px;
         }
 
-        .btn-danger {
-            border-color: #ff0040; /* 빨강 테두리 */
-            color: #ff0040; /* 버튼 글자색 빨강 */
-        }
-
         a {
-            color: #00aaff; /* 링크 색상 블루 */
-            text-decoration: none; /* 링크 밑줄 제거 */
+            color: #00aaff;
+            text-decoration: none;
         }
 
         p {
@@ -93,81 +112,149 @@
             font-size: 12px;
         }
 
-        .error-message {
-            color: red; /* 글자색 빨강 */
+        p th {
+            color: red;
         }
 
-        /* 레트로 폰트 로드 */
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        /* 배경 애니메이션 */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 170, 255, 0.1) 0,
+                rgba(0, 170, 255, 0.1) 1px,
+                transparent 1px,
+                transparent 50%
+            );
+            animation: animate 15s linear infinite;
+        }
+
+        .glitch {
+            font-size: 20vw;
+            color: #00aaff;
+            position: absolute;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 0 red, -2px 0 cyan;
+            }
+            20% {
+                text-shadow: -2px 0 red, 2px 0 cyan;
+            }
+            40% {
+                text-shadow: 2px 0 red, -2px 0 cyan;
+            }
+            60% {
+                text-shadow: -2px 0 red, 2px 0 cyan;
+            }
+            80% {
+                text-shadow: 2px 0 red, -2px 0 cyan;
+            }
+            100% {
+                text-shadow: -2px 0 red, 2px 0 cyan;
+            }
+        }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <!-- 회원가입 폼 시작 -->
-     <h1>Sign Up</h1>
-    <form action="/users/signup" method="post">
-        <!-- 닉네임 입력 필드 -->
-        <div class="input-group">
-            <span class="input-group-text">💬</span>
-            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임" required>
-            <button type="button" class="btn-check" id="checkNickname">중복 체크</button>
-        </div>
-        <!-- 아이디 입력 필드 -->
-        <div class="input-group">
-            <span class="input-group-text">👤</span>
-            <input type="text" class="form-control" id="username" name="username" placeholder="아이디" required>
-            <button type="button" class="btn-check" id="checkUsername">중복 체크</button>
-        </div>
-        <!-- 비밀번호 입력 필드 -->
-        <div class="input-group">
-            <span class="input-group-text">🔒</span>
-            <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
-        </div>
-        <!-- 회원가입 버튼 -->
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
-    <!-- 에러 메시지 표시 -->
-    <div class="error-message">
-        <p th:text="${error}"></p>
+    <div class="background">
+        <div class="glitch">GAME</div>
     </div>
-</div>
+    <div class="container">
+        <!-- 회원가입 폼 시작 -->
+        <h1>Sign Up</h1>
+        <form action="/users/signup" method="post">
+            <!-- 닉네임 입력 필드 -->
+            <div class="input-group">
+                <span class="input-group-text">💬</span>
+                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임" required>
+                <button type="button" class="btn-check" id="checkNickname">중복 체크</button>
+            </div>
+            <!-- 아이디 입력 필드 -->
+            <div class="input-group">
+                <span class="input-group-text">👤</span>
+                <input type="text" class="form-control" id="username" name="username" placeholder="아이디" required>
+                <button type="button" class="btn-check" id="checkUsername">중복 체크</button>
+            </div>
+            <!-- 비밀번호 입력 필드 -->
+            <div class="input-group">
+                <span class="input-group-text">🔒</span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
+            </div>
+            <!-- 회원가입 버튼 -->
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <!-- 에러 메시지 표시 -->
+        <div class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#checkUsername').click(function() {
-            var username = $('#username').val();
-            $.ajax({
-                url: '/users/checkUsername',
-                type: 'GET',
-                data: { username: username },
-                success: function(data) {
-                    if (data.result) {
-                        alert('아이디가 이미 사용 중입니다.');
-                    } else {
-                        alert('사용 가능한 아이디입니다.');
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#checkUsername').click(function() {
+                var username = $('#username').val();
+                $.ajax({
+                    url: '/users/checkUsername',
+                    type: 'GET',
+                    data: { username: username },
+                    success: function(data) {
+                        if (data.result) {
+                            alert('아이디가 이미 사용 중입니다.');
+                        } else {
+                            alert('사용 가능한 아이디입니다.');
+                        }
                     }
-                }
+                });
+            });
+
+            $('#checkNickname').click(function() {
+                var nickname = $('#nickname').val();
+                $.ajax({
+                    url: '/users/checkNickname',
+                    type: 'GET',
+                    data: { nickname: nickname },
+                    success: function(data) {
+                        if (data.result) {
+                            alert('닉네임이 이미 사용 중입니다.');
+                        } else {
+                            alert('사용 가능한 닉네임입니다.');
+                        }
+                    }
+                });
             });
         });
-
-        $('#checkNickname').click(function() {
-            var nickname = $('#nickname').val();
-            $.ajax({
-                url: '/users/checkNickname',
-                type: 'GET',
-                data: { nickname: nickname },
-                success: function(data) {
-                    if (data.result) {
-                        alert('닉네임이 이미 사용 중입니다.');
-                    } else {
-                        alert('사용 가능한 닉네임입니다.');
-                    }
-                }
-            });
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
