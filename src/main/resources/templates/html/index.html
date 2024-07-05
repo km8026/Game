@@ -44,31 +44,32 @@
         <div class="carousel-item active">
           <div class="gameboy-container">
             <a th:href="@{/liar}" class="gameboy1_link">
+              <a th:href="@{/login}" th:if="${session.user_info == null}"></a>
               <div th:replace="common/gameboy"></div>
-            </a>
+            
             <a th:href="@{/game}" class="gameboy2_link">
+              <a th:href="@{/login}" th:if="${session.user_info == null}"></a>
               <div th:replace="common/gameboy2">
               </div>
-            </a>
 
             <a th:href="@{/tetris}" class="gameboy3_link">
+              <a th:href="@{/login}" th:if="${session.user_info == null}"></a>
               <div th:replace="common/gameboy3"></div>
-            </a>
           </div>
         </div>
         <div class="carousel-item">
           <div class="gameboy-container">
             <a th:href="@{/roulette}" class="gameboy4_link">
+              <a th:href="@{/login}" th:if="${session.user_info == null}"></a>
               <div th:replace="common/gameboy4"></div>
-            </a>
             <a th:href="@{/cll}" class="gameboy5_link">
+              <a th:href="@{/login}" th:if="${session.user_info == null}"></a>
               <div th:replace="common/gameboy5">
               </div>
-            </a>
 
             <a href="https://pokerogue.net/" class="gameboy6_link">
+              <a th:href="@{/login}" th:if="${session.user_info == null}"></a>
               <div th:replace="common/gameboy6"></div>
-            </a>
 
           </div>
         </div>
