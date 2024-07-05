@@ -137,7 +137,8 @@
             });
 
             // WebSocket 연결 설정  // 서버 킬때마다 바꿀것
-            var socket = new WebSocket("ws://localhost:8080/list");
+            var socket = new WebSocket("wss://" + window.location.host + "/list");
+            // var socket = new WebSocket("wss://896f-218-235-89-82.ngrok-free.app/list");
 
             socket.onmessage = function (event) {
                 console.log(event.data)
