@@ -143,7 +143,6 @@ public class UserController {
     }
 
     @PostMapping("/login2")
-<<<<<<< HEAD
     public String loginPost(@ModelAttribute User user) {
         User dbUser = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (dbUser != null) {
@@ -152,4 +151,3 @@ public class UserController {
         return "redirect:/index";
     }
 }
->>>>>>> 25246c642c3947879260d3fb9c1e02aaad0b2030
