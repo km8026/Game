@@ -150,4 +150,19 @@ public class UserController {
         }
         return "redirect:/index";
     }
+        // 사용자의 로그인 상태를 확인하는 컨트롤러 메서드
+        @GetMapping("/checkLoginStatus")
+        @ResponseBody
+        public Map<String, Object> checkLoginStatus() {
+            Map<String, Object> response = new HashMap<>();
+            User loggedInUser = (User) session.getAttribute("user_info");
+    
+            if (loggedInUser != null) {
+                response.put("loggedIn", true);
+            } else {
+                response.put("loggedIn", false);
+            }
+    
+            return response;
+        }
 }
