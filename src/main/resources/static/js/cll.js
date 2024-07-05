@@ -1,22 +1,6 @@
-/*
-
-
-
-If you want to learn how this game was made, check out this video, that walks through the main ideas: 
-
-YouTube: https://youtu.be/TAmYp4jKWoM
-Skillshare: https://skl.sh/3nudJ1o
-
-Follow me on twitter for more: https://twitter.com/HunorBorbely
-
-
-
-*/
-
 window.addEventListener("DOMContentLoaded", function (event) {
-  window.focus(); // Capture keys right away (by default focus is on editor)
-
-  // Game data
+  window.focus(); 
+  
   let snakePositions; // An array of snake positions, starting head first
   let applePosition; // The position of the apple
 
