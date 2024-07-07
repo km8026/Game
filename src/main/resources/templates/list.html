@@ -187,7 +187,7 @@
                 <button type="button" class="joinButton" th:attr="data-room-id=${room.id}">Join</button>
                 <form th:action="@{/deleteRoom}" method="post">
                     <input type="hidden" name="roomId" th:value="${room.id}" />
-                    <button type="submit" class="delete">Delete</button>
+                    <!-- <button type="submit" class="delete">Delete</button> -->
                 </form>
             </div>
         </li>

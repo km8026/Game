@@ -33,7 +33,7 @@
     <h1>Create Game Room</h1>
     <form th:action="@{/createRoom}" th:object="${gameRoom}" method="post">
         <input type="text" th:field="*{name}" placeholder="방이름을 적으세요" required />
-        <input type="text" th:field="*{creator}" placeholder="닉네임을 적으세요" required />
+        <input type="text" th:field="*{creator}" placeholder="영어로 닉네임을 적으세요" required />
         <button type="submit">Create Room</button>
     </form>
 </body>
