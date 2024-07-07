@@ -6,14 +6,14 @@ body {
 
 body {
   --size: 15px;
-  --color: black;
+  --color: rgba(255, 255, 255, 0.493);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--color);
   background-color: #ff8585;
   background: linear-gradient(
     162deg,
-    rgba(255, 133, 133, 1) 0%,
-    rgba(227, 84, 95, 1) 100%
+    rgb(171, 172, 183) 0%,
+    rgb(215, 182, 182) 100%
   );
 }
 

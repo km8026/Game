@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote for the Liar</title>
+    <title>라이어를 투표해주세요</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,13 +76,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Vote for the Liar</h1>
+        <h1>결과창</h1>
         <div class="players">
             <h3>플레이어 목록</h3>
             <ul>
                 <li th:each="player : ${gameRoom.players}">
                     <span th:text="${player.name}"></span>
-                    <button th:attr="data-player-name=${player.name}" onclick="voteLiar(this)">Vote</button>
+                    <button th:attr="data-player-name=${player.name}" onclick="voteLiar(this)">확인</button>
                 </li>
             </ul>
         </div>

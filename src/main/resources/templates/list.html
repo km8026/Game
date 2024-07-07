@@ -187,7 +187,7 @@
                 <button type="button" class="joinButton" th:attr="data-room-id=${room.id}">Join</button>
                 <form th:action="@{/deleteRoom}" method="post">
                     <input type="hidden" name="roomId" th:value="${room.id}" />
-                    <button type="submit" class="delete">Delete</button>
+                    <!-- <button type="submit" class="delete">Delete</button> -->
                 </form>
             </div>
         </li>
@@ -199,7 +199,7 @@
             <span class="close">&times;</span>
             <form id="joinForm">
                 <input type="hidden" id="modalRoomId" name="roomId" />
-                <label for="modalPlayerName">닉네임을 적으세요:</label>
+                <label for="modalPlayerName">닉네임을 영어로 적으세요:</label>
                 <input type="text" id="modalPlayerName" name="playerName" required />
                 <button type="submit">Join Room</button>
             </form>
