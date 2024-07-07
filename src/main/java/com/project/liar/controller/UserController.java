@@ -44,6 +44,26 @@ public class UserController {
         return map;
     }
 
+    @GetMapping("/checkUsername")
+    @ResponseBody
+    public Map<String, Object> checkUsername(@RequestParam String username) {
+        boolean result = userService.isUsernameTaken(username);
+        System.out.println(result);
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", result);
+        return map;
+    }
+
+    @GetMapping("/checkNickname")
+    @ResponseBody
+    public Map<String, Object> checkNickname(@RequestParam String nickname) {
+        boolean result = userService.isNicknameTaken(nickname);
+        System.out.println(result);
+        Map<String, Object> map = new HashMap<>();
+        map.put("result", result);
+        return map;
+    }
+
     @PostMapping("/signup")
     public String signupUser(@ModelAttribute User user, Model model) {
         try {
