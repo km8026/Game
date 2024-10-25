@@ -5,7 +5,7 @@
 
 ### Recycle Project ✅
 
-<br/> [<img src="https://img.shields.io/badge/프로젝트 기간-2024.07.01~2022.07.08-green?style=flat&logo=&logoColor=white" />]()
+<br/> [<img src="https://img.shields.io/badge/프로젝트 기간-2024.07.01~2024.07.08-green?style=flat&logo=&logoColor=white" />]()
 
 </div> 
 
